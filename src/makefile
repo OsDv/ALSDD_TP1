@@ -3,7 +3,7 @@ CC=gcc
 CFLAGS=-I$(IDIR)
 
 ODIR=obj
-LDIR =../lib
+#LDIR =../lib
 
 #LIBS=-lm
 
@@ -23,4 +23,4 @@ BankManager: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
+	rm -f $(ODIR)/*.o
