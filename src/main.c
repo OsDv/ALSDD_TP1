@@ -1,7 +1,6 @@
 #include <mainlib.h>
-int main(){
-    printf("Hello world");
-        printf("Hello world");
 
-    return 0;
+void main(){
+    person ahmed={"Ahmed","Dib"};
+    printf("this is : %s %s",ahmed.fName,ahmed.lName);
 }
