@@ -42,6 +42,7 @@ typedef struct {
     transactionP history;  // head of the account's transactions's list  
 }account;
 
+// account node used to create double linked list of accounts
 typedef struct AccNode{
     account data;
     account *next,*prev;
