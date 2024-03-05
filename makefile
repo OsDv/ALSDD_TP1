@@ -5,7 +5,7 @@ CFLAGS=-I$(IDIR)
 ODIR=src/obj
 SDIR=src
 
-_DEPS = mainlib.h
+_DEPS = mainlib.h 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = main.o mainlib.o 
