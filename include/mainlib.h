@@ -45,7 +45,7 @@ typedef struct {
 // account node used to create double linked list of accounts
 typedef struct AccNode{
     account data;
-    account *next,*prev;
+    struct AccNode *next,*prev;
 } *accountP;
 
 
