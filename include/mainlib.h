@@ -28,7 +28,7 @@ typedef struct {
 } transaction;
 
 // transaction node to create a double linked list 
-typedef struct tansactionNode{
+typedef struct tansactionNode{ // size=32
     transaction data;
     struct tansactionNode *next,*prev;
 } *transactionP;
@@ -43,7 +43,7 @@ typedef struct {
 }account;
 
 // account node used to create double linked list of accounts
-typedef struct AccNode{
+typedef struct AccNode{ // size=80
     account data;
     struct AccNode *next,*prev;
 } *accountP;
