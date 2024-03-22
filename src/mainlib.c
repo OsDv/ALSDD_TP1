@@ -53,7 +53,6 @@ accountP accPrev(accountP p){   // returns the adress of the previus element of 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-=======
 void assfName(accountP p,char *arg_fName){
     int i=0;
      while((arg_fName[i])&&(i<20)){
@@ -83,6 +82,14 @@ void accAssPrev(accountP p,accountP q){  // assigne q to "prev" field of p
 
 void tranAllocate(transactionP *p){
     (*p)=(transactionP)malloc(32);
+}
+void historyClean(accountP p){
+    transactionP next,tran= p->data.history;
+    while (tran){
+        next=tran->next;
+        free(tran);
+        tran=next;
+    }
 }
 
 

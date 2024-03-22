@@ -62,7 +62,7 @@ accountP accPrev(accountP p);  // returns the adress of the previus element of p
 void assfName(accountP p,char *arg_fName);// copy "arg_fname" to account copy client first name
 void asslName(accountP p,char *arg_lName);
 
-
+void historyClean(accountP p);
 
 
 
