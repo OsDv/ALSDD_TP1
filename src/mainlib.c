@@ -1,6 +1,7 @@
 #include <mainlib.h>
 
                                     /*  Abstract machine    */
+
 void accAllocate(accountP *p){ // allocate a memory for an account node and assigne its adress to "p" 
     *p= (accountP) malloc(80); // size of accountNode = 80
     (*p)->data.history=NULL; 
@@ -34,8 +35,9 @@ void accCLName(accountP p,char *arg_lName){ // Copy the last name of client of a
      arg_lName[20]='\0';// last character always "\0" for protection
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
 unsigned long accBalence(accountP p){ // RETURNS THE BALENCE OF THE ACCOUNT ULONG
-    return (p->data.balence);
+  return (p->data.balence);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 transactionP accHistory(accountP p){
@@ -50,6 +52,8 @@ accountP accPrev(accountP p){   // returns the adress of the previus element of 
     return (p->prev);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+=======
 void assfName(accountP p,char *arg_fName){
     int i=0;
      while((arg_fName[i])&&(i<20)){
