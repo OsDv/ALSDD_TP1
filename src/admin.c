@@ -56,6 +56,6 @@ void deleteAccount(accountP *head,accountP p){
     scanf("%s", (*p)->data.customer.lName);
     // Read the account code
     printf("Account Code: ");
-    scanf("%hu", (*p)->data.code);
+    scanf("%u", (*p)->data.code);
     (*p)->data.history=NULL;
  }

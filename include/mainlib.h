@@ -35,8 +35,8 @@ typedef struct tansactionNode{ // size=32
 
 // type for account contains all acount required informations (data field for account node)
 typedef struct {
-    unsigned int number; // 0000000001-9999999999
-    unsigned short code;  // five-digit 00000-99999
+    unsigned int number; // 000000001-999999999
+    unsigned int code;  // six-digit 000000-999999
     person customer; // lName & fName of client
     unsigned long balence;  // balence of the account in Belly 
     transactionP history;  // head of the account's transactions's list  
@@ -52,7 +52,7 @@ typedef struct AccNode{ // size=80
 /*    ABSTRACT MAHINE     */
 void accAllocate(accountP *p);
 unsigned int accNumber(accountP p);
-unsigned short accCode(accountP p); // returns ushort the code of the account pointed by "p"
+unsigned int accCode(accountP p); // returns ushort the code of the account pointed by "p"
 void accCFName(accountP p,char *arg_fName); // Copy the first name of client of account pointed by "p" in string arg_fName
 void accCLName(accountP p,char *arg_lName); // Copy the last name of client of account pointed by "p" in string arg_lName
 unsigned long accBalence(accountP p); // RETURNS THE BALENCE OF THE ACCOUNT ULONG

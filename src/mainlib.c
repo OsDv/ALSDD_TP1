@@ -11,7 +11,7 @@ unsigned int accNumber(accountP p){ //returns uint the number of the account poi
     return (p->data.number);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-unsigned short accCode(accountP p){ // returns ushort the code of the account pointed by "p"
+unsigned int accCode(accountP p){ // returns ushort the code of the account pointed by "p"
     return (p->data.code);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
