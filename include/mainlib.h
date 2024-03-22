@@ -36,7 +36,7 @@ typedef struct tansactionNode{ // size=32
 // type for account contains all acount required informations (data field for account node)
 typedef struct {
     unsigned int number; // 0000000001-9999999999
-    unsigned short code;  // six-digit 000000-999999
+    unsigned short code;  // five-digit 00000-99999
     person customer; // lName & fName of client
     unsigned long balence;  // balence of the account in Belly 
     transactionP history;  // head of the account's transactions's list  
