@@ -68,8 +68,9 @@ void asslName(accountP p,char *arg_lName);
 void historyClean(accountP p);
 void createNAccount(accountP *head,int n); // creat a linkedlist of n account and put the adress of head in (head)
 void createNtransaction(transactionP* head,int n);//creat a linkedlist of n transaction and put the adress of head in (head)
-
-
+bool accNumberExist(accountP head,unsigned int number);// check if account nummber exists
+accountP accAccessNumber(accountP head,unsigned int number);// return a pointer to an account by its number if its exists or NULL if not
+void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date);
 
 
 #endif // LIB_H_INCLUDED

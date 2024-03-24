@@ -1,13 +1,15 @@
 #include <mainlib.h>
 
                                     /*  Abstract machine    */
-
-void accAllocate(accountP *p){ // allocate a memory for an account node and assigne its adress to "p" 
+// allocate a memory for an account node and assigne its adress to "p" 
+void accAllocate(accountP *p){ 
     *p= (accountP) malloc(88); // size of accountNode = 88
     (*p)->data.history=NULL; 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-unsigned int accNumber(accountP p){ //returns uint the number of the account pointed by "p"
+
+//returns uint the number of the account pointed by "p"
+unsigned int accNumber(accountP p){ 
     return (p->data.number);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,13 +85,21 @@ void accAssPrev(accountP p,accountP q){  // assigne q to "prev" field of p
 void tranAllocate(transactionP *p){
     (*p)=(transactionP)malloc(32);
 }
-void historyClean(accountP p){
-    transactionP next,tran= p->data.history;
-    while (tran){
-        next=tran->next;
-        free(tran);
-        tran=next;
-    }
+
+transactionP tranNext(transactionP p){
+    return p->next;
+}
+transactionP tranPrev(transactionP p){
+    return p->prev;
+}
+void tranAssCode(transactionP p,OPCODE code){
+    p->data.code=code;
+}
+void tranAssBalence(transactionP p,unsigned int balence){
+    p->data.balence=balence;
+}
+void tranAssDate(transactionP p,char *date){
+    strncpy(p->data.date,date,10);
 }
 
 void tranAssNext(transactionP p,transactionP q){
@@ -100,8 +110,17 @@ void tranAssPrev(transactionP p,transactionP q){
 }
 
                                     /*  Abstract machine    */
+                                    void historyClean(accountP p){
+    transactionP next,tran= p->data.history;
+    while (tran){
+        next=tran->next;
+        free(tran);
+        tran=next;
+    }
+}
 
-void createNAccount(accountP *head,int n){ // creat a linkedlist of n account and put the adress of head in (head)
+// creat a linkedlist of n account and put the adress of head in (head)
+void createNAccount(accountP *head,int n){ 
     if (n==0) return;
     int i;
     accountP curr=NULL,prev=NULL;
@@ -120,7 +139,8 @@ void createNAccount(accountP *head,int n){ // creat a linkedlist of n account an
     }
     accAssNext(curr,NULL);
 }
-void createNtransaction(transactionP* head,int n){//creat a linkedlist of n transaction and put the adress of head in (head)
+//creat a linkedlist of n transaction and put the adress of head in (head)
+void createNtransaction(transactionP* head,int n){
     if (n==0) return;
     int i;
     transactionP curr=NULL,prev=NULL;
@@ -138,5 +158,47 @@ void createNtransaction(transactionP* head,int n){//creat a linkedlist of n tran
         prev=curr;
     }
     tranAssNext(curr,NULL);
+}
+// check if account nummber exists
+bool accNumberExist(accountP head,unsigned int number){
+    while (head)
+    {
+        if (accNumber(head)==number) return true; // account number exists
+        head=accNext(head);
+    }
+    return false;
+}
+// return a pointer to an account by its number if its exists or NULL if not
+accountP accAccessNumber(accountP head,unsigned int number){
+    if (!accNumberExist(head,number)) return NULL;
+    else {
+        while (head)
+        {
+            if (accNumber(head)==number) return head;
+            head=accNext(head);
+        }
+    }
+}
+
+void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date){
+    transactionP tr,prev;
+    tranAllocate(&tr);
+    tranAssCode(tr,code);
+    tranAssBalence(tr,balence);
+    tranAssDate(tr,date);
+    if (accHistory(acc)==NULL){
+        acc->data.history=tr;
+        tranAssPrev(tr,NULL);
+        tranAssNext(tr,NULL);
+    } else {
+        prev=accHistory(acc);
+        while (prev->next)
+        {
+            prev=tranNext(prev);
+        }
+        tranAssNext(prev,tr);
+        tranAssPrev(tr,prev);
+    }
+    tranAssNext(tr,NULL);
 }
 

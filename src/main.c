@@ -1,6 +1,7 @@
 #include <mainlib.h>
 #include <admin.h>
 #include <textFileModules.h>
+#include <customer.h>
 
 void main(){
     unsigned int accountsN; // number of accounts
@@ -11,6 +12,7 @@ void main(){
     fclose(fptr);
    transactionP tr;
     accountP p=mainHead;
+    customerTransfer(mainHead,mainHead);
      while(p) {
     printf("the number %u",p->data.number);
     printf("\nThe code %u",p->data.code);
@@ -24,4 +26,6 @@ void main(){
     }
     p=accNext(p);
     }
+
+
 }

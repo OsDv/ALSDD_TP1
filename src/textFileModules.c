@@ -46,3 +46,5 @@ void readFile(accountP* head, FILE* fptr,int *num){
         actAcc=accNext(actAcc);
     }
 }
+
+
