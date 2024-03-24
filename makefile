@@ -5,10 +5,10 @@ CFLAGS=-I$(IDIR)
 ODIR=src/obj
 SDIR=src
 
-_DEPS = mainlib.h admin.h
+_DEPS = mainlib.h admin.h textFileModules.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o mainlib.o admin.o
+_OBJ = main.o mainlib.o admin.o textFileModules.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 

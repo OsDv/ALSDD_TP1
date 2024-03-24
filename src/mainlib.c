@@ -3,7 +3,7 @@
                                     /*  Abstract machine    */
 
 void accAllocate(accountP *p){ // allocate a memory for an account node and assigne its adress to "p" 
-    *p= (accountP) malloc(80); // size of accountNode = 80
+    *p= (accountP) malloc(88); // size of accountNode = 88
     (*p)->data.history=NULL; 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +92,51 @@ void historyClean(accountP p){
     }
 }
 
-
+void tranAssNext(transactionP p,transactionP q){
+    p->next=q;
+}
+void tranAssPrev(transactionP p,transactionP q){
+    p->prev=q;
+}
 
                                     /*  Abstract machine    */
+
+void createNAccount(accountP *head,int n){ // creat a linkedlist of n account and put the adress of head in (head)
+    if (n==0) return;
+    int i;
+    accountP curr=NULL,prev=NULL;
+    accAllocate(&curr);
+    (*head)=curr;
+    for (i=1;i<n;i++){
+        accAllocate(&curr);
+        if (prev==NULL){
+            accAssNext(*head,curr);
+            accAssPrev(curr,*head);
+        } else {
+            accAssNext(prev,curr);
+            accAssPrev(curr,prev);
+        }
+        prev=curr;
+    }
+    accAssNext(curr,NULL);
+}
+void createNtransaction(transactionP* head,int n){//creat a linkedlist of n transaction and put the adress of head in (head)
+    if (n==0) return;
+    int i;
+    transactionP curr=NULL,prev=NULL;
+    tranAllocate(&curr);
+    (*head)=curr;
+    for (i=1;i<n;i++){
+        tranAllocate(&curr);
+        if (prev==NULL){
+            tranAssNext(*head,curr);
+            tranAssPrev(curr,*head);
+        } else {
+            tranAssNext(prev,curr);
+            tranAssPrev(curr,prev);
+        }
+        prev=curr;
+    }
+    tranAssNext(curr,NULL);
+}
 

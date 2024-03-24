@@ -10,9 +10,10 @@
 /*      Data structures definition      */
 // type and expected vlues for operation code 
 #define OPCODE unsigned char
-#define TRANSFER 1
-#define DEPOSITE 2
-#define WITHDRAWAL 3
+#define TRANSFERIN 1
+#define TRANSFEROUT 2
+#define DEPOSITE 3
+#define WITHDRAWAL 4
 
 // type for customer contains first name and last name // 
 typedef struct { 
@@ -23,7 +24,7 @@ typedef struct {
 // type for transaction contains all transation informations (data field for transaction node)// 
 typedef struct { 
     OPCODE code;
-    char date[9];
+    char date[11];
     unsigned int balence;
 } transaction;
 
@@ -38,12 +39,13 @@ typedef struct {
     unsigned int number; // 000000001-999999999
     unsigned int code;  // six-digit 000000-999999
     person customer; // lName & fName of client
-    unsigned long balence;  // balence of the account in Belly 
+    unsigned long balence;  // balence of the account  
     transactionP history;  // head of the account's transactions's list  
+    unsigned int transNumber; // number of transactions of the account
 }account;
 
 // account node used to create double linked list of accounts
-typedef struct AccNode{ // size=80
+typedef struct AccNode{ // size=88
     account data;
     struct AccNode *next,*prev;
 } *accountP;
@@ -62,8 +64,10 @@ accountP accPrev(accountP p);  // returns the adress of the previus element of p
 void assfName(accountP p,char *arg_fName);// copy "arg_fname" to account copy client first name
 void asslName(accountP p,char *arg_lName);
 
+//  GENERAL FUNCTIONS/PROCEDURES
 void historyClean(accountP p);
-
+void createNAccount(accountP *head,int n); // creat a linkedlist of n account and put the adress of head in (head)
+void createNtransaction(transactionP* head,int n);//creat a linkedlist of n transaction and put the adress of head in (head)
 
 
 

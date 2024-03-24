@@ -1,6 +1,6 @@
 #include <mainlib.h>
 #include <admin.h>
-
+/*
 void contolPanel(){
     char choice;
     do
@@ -18,14 +18,14 @@ void contolPanel(){
             break;
         }
         case '3':{
-            editAccount;
+   //         editAccount;
             break;
         }
         
         default:
             break;
         }
-    } while (/* condition */);
+    } while (choice!=0);
     
 }
 
@@ -59,3 +59,4 @@ void deleteAccount(accountP *head,accountP p){
     scanf("%u", (*p)->data.code);
     (*p)->data.history=NULL;
  }
+*/
