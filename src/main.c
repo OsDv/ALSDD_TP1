@@ -12,6 +12,12 @@ void main(){
     fclose(fptr);
    transactionP tr;
     accountP p=mainHead;
+    
+
+    customerCheckBalence(mainHead);
+    customerCheckBalence(accNext(mainHead));
+    customerWithdrawal(accNext(accNext(mainHead)));;
+    customerDeposit(mainHead);
     customerTransfer(mainHead,mainHead);
      while(p) {
     printf("the number %u",p->data.number);
@@ -21,7 +27,8 @@ void main(){
     printf("\nThe Blanence %lu $\n",p->data.balence);
     tr=p->data.history;
     while (tr){
-    printf("transaction code %d date: %s balence : %u\n",tr->data.code,tr->data.date,tr->data.balence);
+   // printf("transaction code %d date: %s balence : %u\n",tr->data.code,tr->data.date,tr->data.balence);
+   printTransaction(tr);
     tr=tr->next;
     }
     p=accNext(p);

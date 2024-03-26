@@ -17,7 +17,7 @@ unsigned int accCode(accountP p){ // returns ushort the code of the account poin
     return (p->data.code);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-void accCFName(accountP p,char *arg_fName){ // Copy the first name of client of account pointed by "p" in string arg_fName
+void accFName(accountP p,char *arg_fName){ // Copy the first name of client of account pointed by "p" in string arg_fName
     int i=0;
      while((p->data.customer.fName[i])&&(i<20)){
         arg_fName[i]=p->data.customer.fName[i];
@@ -27,7 +27,7 @@ void accCFName(accountP p,char *arg_fName){ // Copy the first name of client of 
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-void accCLName(accountP p,char *arg_lName){ // Copy the last name of client of account pointed by "p" in string arg_lName
+void accLName(accountP p,char *arg_lName){ // Copy the last name of client of account pointed by "p" in string arg_lName
     int i=0;
      while((p->data.customer.lName[i])&&(i<20)){
         arg_lName[i]=p->data.customer.lName[i];
@@ -201,4 +201,27 @@ void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date){
     }
     tranAssNext(tr,NULL);
 }
+
+void printTransaction(transactionP p){
+    switch ((p->data.code))
+    {
+    case 1:
+        printf(_TRANSACTION_FORMAT_,_OP1_,GREEN,p->data.balence,p->data.date);
+        break;
+    case 2:
+        printf(_TRANSACTION_FORMAT_,_OP2_,RED,p->data.balence,p->data.date);
+        break;
+    case 3:
+        printf(_TRANSACTION_FORMAT_,_OP3_,GREEN,p->data.balence,p->data.date);
+        break;
+    case 4:
+        printf(_TRANSACTION_FORMAT_,_OP4_,RED,p->data.balence,p->data.date);
+    }
+}
+
+void customerHistoryDate(accountP p){
+    printf("===TRANSACTIONS HISTORY===)\n");
+    printf("Enter the date (dd/mm/yyyy)");
+}
+
 

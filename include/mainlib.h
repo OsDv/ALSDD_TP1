@@ -6,7 +6,15 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
-
+//colors // to be used to change color text when printing
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
 /*      Data structures definition      */
 // type and expected vlues for operation code 
 #define OPCODE unsigned char
@@ -15,6 +23,11 @@
 #define DEPOSITE 3
 #define WITHDRAWAL 4
 
+#define _OP1_ "Transfer received"
+#define _OP2_ "Transfer sent"
+#define _OP3_ "Deposit"
+#define _OP4_ "Withdrawal"
+#define _TRANSACTION_FORMAT_ "Operation type: %s\nBalence:%s %u \033[0m \nDate: %s\n"
 // type for customer contains first name and last name // 
 typedef struct { 
     char lName[20];
@@ -71,6 +84,6 @@ void createNtransaction(transactionP* head,int n);//creat a linkedlist of n tran
 bool accNumberExist(accountP head,unsigned int number);// check if account nummber exists
 accountP accAccessNumber(accountP head,unsigned int number);// return a pointer to an account by its number if its exists or NULL if not
 void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date);
-
+void printTransaction(transactionP p);
 
 #endif // LIB_H_INCLUDED
