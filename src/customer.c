@@ -159,3 +159,78 @@ bool dateCheck(char *date){
     if (dd>max_d)return false;
     else return true;
 }
+
+accountP customerSignin(accountP head){
+    unsigned int num;
+    char c;
+    printf("=== Sign in ===\n");
+    printf("Enter your account number: ");
+    scanf("%u",&num);
+    while((c=(char)fgetc(stdin))!=EOF && c!='\n');
+    while (!accNumberExist(head,num)&&num!=0){
+        printf("Not found!\nEnter a valid number or 0 to back: ");
+        scanf("%u",&num);
+        while((c=(char)fgetc(stdin))!=EOF && c!='\n');
+    }
+    if (num==0) return NULL;
+    else {
+        accountP p=accAccessNumber(head,num);
+        printf("\nAccount code: ");
+        scanf("%u",&num);
+    while((c=(char)fgetc(stdin))!=EOF && c!='\n');
+    while (num!=p->data.code&&num!=0){
+        printf("Wrong code!!\nEnter the code again or 0 to back: ");
+        scanf("%u",&num);
+        while((c=(char)fgetc(stdin))!=EOF && c!='\n');
+    }
+    if (num==0) return NULL;
+    else return p;
+
+    }
+}
+
+void customerDashboard(accountP head,accountP actAccount){
+    if (actAccount==NULL) return;
+    int choice;
+    char c;
+    do {
+        printf("\033[2J");
+        printf("=== Account Dashboard ===\n");
+        printf(_ACCOUNT_FORMAT_,accFname(actAccount),accLname(actAccount),accNumber(actAccount),accCode(actAccount),accBalence(actAccount));
+        printf("==The Menu ==\n");
+        printf("\t1) Make transfer\n");
+        printf("\t2) Deposit to an account\n");
+        printf("\t3) Make a withdrawal\n");
+        printf("\t4) Check total amount\n");
+        printf("\t5) Check your transactions hitory\n");
+        printf("\t0) To exit...\n");
+        printf("%sEnter your choice: %s",CYAN,RESET);
+        scanf("%u",&choice);
+        while((c=(char)fgetc(stdin))!=EOF && c!='\n');
+        switch (choice)
+        {
+        case 1:
+            customerTransfer(head,actAccount);
+            break;
+        case 2:
+            customerDeposit(head);
+            break;
+        case 3:
+            customerWithdrawal(actAccount);
+            break;
+        case 4:
+            customerCheckBalence(actAccount);
+            break;
+        case 5:
+            customerHistoryDate(actAccount);
+            break;
+        case 0: break;
+        
+        default:
+            break;
+        }
+
+
+
+    } while(choice!=0);
+}

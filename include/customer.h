@@ -11,6 +11,8 @@ void customerDeposit(accountP head);
 void customerWithdrawal(accountP src);
 void customerCheckBalence(accountP src);
 void customerHistoryDate(accountP p);
+void customerDashboard(accountP head,accountP actAccount);
+accountP customerSignin(accountP head);
 
 int is_leap_year(int year) ;
 void dateRead(char *dest);

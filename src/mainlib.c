@@ -16,8 +16,17 @@ unsigned int accNumber(accountP p){
 unsigned int accCode(accountP p){ // returns ushort the code of the account pointed by "p"
     return (p->data.code);
 }
+// returns pointer to account first name
+char *accFname(accountP p){
+    return (p->data.customer.fName);
+}
+// returns pointer to account last name
+char *accLname(accountP p){
+    return (p->data.customer.lName);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
-void accFName(accountP p,char *arg_fName){ // Copy the first name of client of account pointed by "p" in string arg_fName
+void accCPFName(accountP p,char *arg_fName){ // Copy the first name of client of account pointed by "p" in string arg_fName
     int i=0;
      while((p->data.customer.fName[i])&&(i<20)){
         arg_fName[i]=p->data.customer.fName[i];
@@ -27,7 +36,7 @@ void accFName(accountP p,char *arg_fName){ // Copy the first name of client of a
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-void accLName(accountP p,char *arg_lName){ // Copy the last name of client of account pointed by "p" in string arg_lName
+void accCPLName(accountP p,char *arg_lName){ // Copy the last name of client of account pointed by "p" in string arg_lName
     int i=0;
      while((p->data.customer.lName[i])&&(i<20)){
         arg_lName[i]=p->data.customer.lName[i];
@@ -218,4 +227,5 @@ void printTransaction(transactionP p){
         printf(_TRANSACTION_FORMAT_,_OP4_,RED,p->data.balence,p->data.date);
     }
 }
+
 
