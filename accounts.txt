@@ -1,0 +1,56 @@
+=======FILE_STRUCTURE======
+//begining of file and ending are marked by "FILE_BEGIN" and "FILE_END"
+// first line contains the number of accounts stored in the file 
+//other lines contain the accounts list
+//each account start with "BEGIN" and end with "END"
+//begining of file and ending are marked by "FILE_BEGIN" and "FILE_END"
+// account informations order :
+BEGIN
+account_number
+account_code
+first_name
+last_name
+balence
+number_of_transactions
+//list_of_transactions (code|date|balence)
+END
+
+FILE_BEGIN
+3
+BEGIN
+01
+999999
+Ahmed
+dib
+4294967295
+5
+1|22/03/2024|5500
+2|02/12/2024|600
+2|02/12/2024|600
+2|02/12/2024|600
+2|02/12/2024|600
+END
+BEGIN
+02
+123548
+Mouloud
+Koudil
+20000
+3
+1/22/03/2024|50
+2|02/22/2024|150
+2|02/22/2024|150
+END
+BEGIN
+03
+123548
+Cherid
+Nassira
+10
+2
+1|22/03/2024|50
+2|02/22/2024|150
+END
+
+
+FILE_END

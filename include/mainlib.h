@@ -6,14 +6,28 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
-
+//colors // to be used to change color text when printing
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
 /*      Data structures definition      */
 // type and expected vlues for operation code 
 #define OPCODE unsigned char
-#define TRANSFER 1
-#define DEPOSITE 2
-#define WITHDRAWAL 3
+#define TRANSFERIN 1
+#define TRANSFEROUT 2
+#define DEPOSITE 3
+#define WITHDRAWAL 4
 
+#define _OP1_ "Transfer received"
+#define _OP2_ "Transfer sent"
+#define _OP3_ "Deposit"
+#define _OP4_ "Withdrawal"
+#define _TRANSACTION_FORMAT_ "Operation type: %s\nBalence:%s %u \033[0m \nDate: %s\n"
 // type for customer contains first name and last name // 
 typedef struct { 
     char lName[20];
@@ -23,7 +37,7 @@ typedef struct {
 // type for transaction contains all transation informations (data field for transaction node)// 
 typedef struct { 
     OPCODE code;
-    char date[9];
+    char date[11];
     unsigned int balence;
 } transaction;
 
@@ -38,12 +52,13 @@ typedef struct {
     unsigned int number; // 000000001-999999999
     unsigned int code;  // six-digit 000000-999999
     person customer; // lName & fName of client
-    unsigned long balence;  // balence of the account in Belly 
+    unsigned long balence;  // balence of the account  
     transactionP history;  // head of the account's transactions's list  
+    unsigned int transNumber; // number of transactions of the account
 }account;
 
 // account node used to create double linked list of accounts
-typedef struct AccNode{ // size=80
+typedef struct AccNode{ // size=88
     account data;
     struct AccNode *next,*prev;
 } *accountP;
@@ -61,11 +76,16 @@ accountP accNext(accountP p);   // returns the adress of the next element of p i
 accountP accPrev(accountP p);  // returns the adress of the previus element of p in the linked list
 void assfName(accountP p,char *arg_fName);// copy "arg_fname" to account copy client first name
 void asslName(accountP p,char *arg_lName);
+transactionP tranNext(transactionP p);
+transactionP tranPrev(transactionP p);
 
+//  GENERAL FUNCTIONS/PROCEDURES
 void historyClean(accountP p);
-
-
-
-
+void createNAccount(accountP *head,int n); // creat a linkedlist of n account and put the adress of head in (head)
+void createNtransaction(transactionP* head,int n);//creat a linkedlist of n transaction and put the adress of head in (head)
+bool accNumberExist(accountP head,unsigned int number);// check if account nummber exists
+accountP accAccessNumber(accountP head,unsigned int number);// return a pointer to an account by its number if its exists or NULL if not
+void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date);
+void printTransaction(transactionP p);
 
 #endif // LIB_H_INCLUDED
