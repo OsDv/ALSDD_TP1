@@ -219,9 +219,3 @@ void printTransaction(transactionP p){
     }
 }
 
-void customerHistoryDate(accountP p){
-    printf("===TRANSACTIONS HISTORY===)\n");
-    printf("Enter the date (dd/mm/yyyy)");
-}
-
-

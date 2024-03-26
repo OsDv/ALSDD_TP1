@@ -12,7 +12,7 @@ void main(){
     fclose(fptr);
    transactionP tr;
     accountP p=mainHead;
-    
+    customerHistoryDate(mainHead);
 
     customerCheckBalence(mainHead);
     customerCheckBalence(accNext(mainHead));

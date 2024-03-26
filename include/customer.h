@@ -10,9 +10,10 @@ void customerTransfer(accountP head,accountP _sender_);
 void customerDeposit(accountP head);
 void customerWithdrawal(accountP src);
 void customerCheckBalence(accountP src);
+void customerHistoryDate(accountP p);
 
-
-
-
+int is_leap_year(int year) ;
+void dateRead(char *dest);
+bool dateCheck(char *date);
 
 #endif

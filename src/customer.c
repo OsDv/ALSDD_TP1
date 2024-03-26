@@ -101,7 +101,61 @@ void customerCheckBalence(accountP src){
     printf("===CHECK BALENCE===\n");
     printf("Hi,%s %s\n",src->data.customer.fName,src->data.customer.lName);
     printf("Your current balence is %u$\n",accBalence(src));
-    printf("Press any key to continue..\n");
+    printf("Press ENTER to continue..\n");
     getchar();
 
+}
+
+void customerHistoryDate(accountP p){
+    char date[11];
+    bool noTrans=true;
+    printf("===TRANSACTIONS HISTORY===)\n");
+    printf("Hi, %s %s\n",p->data.customer.fName,p->data.customer.fName);
+    printf("Enter the date (dd/mm/yyyy)");
+    dateRead(date);
+    transactionP tr=p->data.history;
+    while (tr)
+    {
+        if (!strncmp(date,tr->data.date,10)) {
+            if (noTrans) printf("===Your tansactions on %s: ===\n",date);
+            printTransaction(tr);
+            noTrans=false;
+        }
+        tr=tranNext(tr);
+    }
+    if (noTrans) printf("You have no transaction on %s !\n",date);
+        printf("Press ENTER to continue..\n");
+    getchar();getchar();
+    
+
+}
+// Function to check if a year is a leap year
+int is_leap_year(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+void dateRead(char *dest){
+    char date[11];
+    while (scanf("%s",date)!=1 || !dateCheck(date))printf("\nEnter a valid date: ");
+    strncpy(dest,date,10);
+
+}
+bool dateCheck(char *date){
+    int max_d;
+    int mm,dd,yy;
+    sscanf(&date[3],"%u",&mm);
+    sscanf(date,"%u",&dd);
+    sscanf(&date[6],"%u",&yy);
+    if(dd<1 || dd>31||mm<1 || mm>12 || date[2]!='/'|| date[5]!='/') return false;
+    if (mm==2) max_d=28+is_leap_year(yy);
+    else if ((mm<8)){
+        if (mm%2==0)max_d=30;
+        else max_d=31;
+    }
+    else{
+        if (mm%2==0)max_d=31;
+        else max_d=30;
+    }
+    if (dd>max_d)return false;
+    else return true;
 }

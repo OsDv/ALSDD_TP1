@@ -76,6 +76,8 @@ accountP accNext(accountP p);   // returns the adress of the next element of p i
 accountP accPrev(accountP p);  // returns the adress of the previus element of p in the linked list
 void assfName(accountP p,char *arg_fName);// copy "arg_fname" to account copy client first name
 void asslName(accountP p,char *arg_lName);
+transactionP tranNext(transactionP p);
+transactionP tranPrev(transactionP p);
 
 //  GENERAL FUNCTIONS/PROCEDURES
 void historyClean(accountP p);
