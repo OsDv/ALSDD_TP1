@@ -111,7 +111,7 @@ void customerHistoryDate(accountP p){
     bool noTrans=true;
     printf("===TRANSACTIONS HISTORY===)\n");
     printf("Hi, %s %s\n",p->data.customer.fName,p->data.customer.lName);
-    printf("Enter the date (dd/mm/yyyy)");
+    printf("Enter the date (dd/mm/yyyy): ");
     dateRead(date);
     transactionP tr=p->data.history;
     while (tr)
