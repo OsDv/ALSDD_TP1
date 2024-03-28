@@ -32,7 +32,7 @@ void accountFromFile(accountP p,FILE *fptr){ //  read an account from txt file
     }
 }
 
-void readFile(accountP* head, FILE* fptr,int *num){ 
+void readFile(accountP* head, FILE* fptr,unsigned int *num){ 
     // read a text file contains a list of accounts in a linkedlist pointed by head and contain "num" account
     char str[256]; // string to read file lines
     int i; 

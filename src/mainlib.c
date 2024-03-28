@@ -209,6 +209,7 @@ void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date){
         tranAssPrev(tr,prev);
     }
     tranAssNext(tr,NULL);
+    acc->data.transNumber++;
 }
 
 void printTransaction(transactionP p){

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../include/admin.h"
+#include <admin.h>
 
 void adminCreateAccount(accountP *head, unsigned int accnum) {
     // Check if the linked list of accounts is empty
@@ -199,7 +199,7 @@ void accountEdit(accountP *head, unsigned int accnum) {
 }
 
 
-void adminControlPanel(accountP *head) {
+void adminControlPanel(accountP *head,unsigned int *accountsN) {
     int choice;
     bool exitMenu = false;
 
@@ -224,6 +224,7 @@ void adminControlPanel(accountP *head) {
                 }
                 } while (accNumberExist(*head, accountNumber));
                 adminCreateAccount(head, accountNumber);
+                (*accountsN)++;
                 break;
             case 2:
                 printf("\n-- Delete Customer Accounts --\n");
@@ -231,6 +232,7 @@ void adminControlPanel(accountP *head) {
                 printf("Enter account number to delete: ");
                 scanf("%u", &deleteAccountNumber);
                 adminDeleteAccount(&head, deleteAccountNumber);
+                (*accountsN)--;
                 break;
             case 3:
                 printf("\n-- Edit Code/Customer --\n");

@@ -25,7 +25,7 @@ void main(){
             customerDashboard(mainHead,customerSignin(mainHead));
             break;
         case 2:
-            adminControlPanel(&mainHead);
+            adminControlPanel(&mainHead,&accountsN);
             break;
         case 0:
             break;

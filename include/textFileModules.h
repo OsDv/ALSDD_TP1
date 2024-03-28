@@ -4,7 +4,7 @@
 
 //READING MADULES
 void accountFromFile(accountP p,FILE *fptr);
-void readFile(accountP* head, FILE* fptr,int *num);
+void readFile(accountP* head, FILE* fptr, unsigned int *num);
 void accountToFile(accountP p,FILE *fptr);
 void writeFile(accountP head,unsigned int accNUM,FILE* fptr);
 

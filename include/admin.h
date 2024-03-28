@@ -9,7 +9,7 @@
  * 
  * @param head Pointer to the head of the account list.
  */
-void adminControlPanel(accountP *head);
+void adminControlPanel(accountP *head,unsigned int *accountsN);
 
 /**
  * @brief Creates a new account and adds it to the account list.
