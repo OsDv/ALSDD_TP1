@@ -15,8 +15,8 @@ void main(){
     do
     {
         printf("=== Welcome back ===\n");
-        printf("Are you: \n\t1)Customer \n\t2)Admin\n");
-        printf("Enter your choice or 0 to exit: ");
+        printf("Are you: \n\t1)Customer \n\t2)Admin\n\t0) Exit...\n");
+        printf("Enter your choice: ");
         scanf("%u",&choice);
         while((c=(char)fgetc(stdin))!=EOF && c!='\n');
         switch (choice)
