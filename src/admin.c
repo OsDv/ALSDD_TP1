@@ -216,8 +216,13 @@ void adminControlPanel(accountP *head) {
             case 1:
                 printf("\n-- Add Customer Accounts --\n");
                 unsigned int accountNumber;
+                do { 
                 printf("Enter account number: ");
                 scanf("%u", &accountNumber);
+                if (accNumberExist(*head, accountNumber)){
+                    printf("This account number is already taken. Enter another number.\n");
+                }
+                } while (accNumberExist(*head, accountNumber));
                 adminCreateAccount(head, accountNumber);
                 break;
             case 2:
