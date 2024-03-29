@@ -261,6 +261,7 @@ void readNAME(char *name){
     bool test;
     do {
     c=fgetc(stdin);
+    if (c!='\n') name[i++]=c;
     while ((c=fgetc(stdin))!=EOF && c!='\n' && i<19)
     {
         name[i++]=c;
