@@ -15,6 +15,7 @@
 #define MAGENTA "\033[35m"
 #define CYAN    "\033[36m"
 #define WHITE   "\033[37m"
+#define CLEAR "\033[2J"
 /*      Data structures definition      */
 // type and expected vlues for operation code 
 #define OPCODE unsigned char
@@ -28,7 +29,7 @@
 #define _OP3_ "Deposit"
 #define _OP4_ "Withdrawal"
 #define _TRANSACTION_FORMAT_ "Operation type: %s\nBalence:%s %u \033[0m \nDate: %s\n"
-#define _ACCOUNT_FORMAT_ "\tName: %s %s\n\tAccount number: %u\n\tAccount code: %u\n\tBalence: %lu\n"
+#define _ACCOUNT_FORMAT_ "\tName: %s %s\n\tAccount number: %u\n\tAccount code: %u\n\tBalance: %lu\n"
 // type for customer contains first name and last name // 
 typedef struct { 
     char lName[20];
@@ -92,5 +93,5 @@ bool accNumberExist(accountP head,unsigned int number);// check if account nummb
 accountP accAccessNumber(accountP head,unsigned int number);// return a pointer to an account by its number if its exists or NULL if not
 void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date);
 void printTransaction(transactionP p);
-
+void readUINT(unsigned int *i);
 #endif // LIB_H_INCLUDED

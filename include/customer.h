@@ -15,7 +15,7 @@ void customerDashboard(accountP head,accountP actAccount);
 accountP customerSignin(accountP head);
 
 int is_leap_year(int year) ;
-void dateRead(char *dest);
-bool dateCheck(char *date);
+void readDate(char *dest);
+bool dateCheck(int d,int m,int y);
 
 #endif

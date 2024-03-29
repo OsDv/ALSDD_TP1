@@ -119,7 +119,7 @@ void tranAssPrev(transactionP p,transactionP q){
 }
 
                                     /*  Abstract machine    */
-                                    void historyClean(accountP p){
+void historyClean(accountP p){
     transactionP next,tran= p->data.history;
     while (tran){
         next=tran->next;
@@ -229,4 +229,10 @@ void printTransaction(transactionP p){
     }
 }
 
-
+void readUINT(unsigned int *i){
+    char c;
+    while(scanf("%u",i)!=1){
+        while((c=fgetc(stdin))!=EOF && (c!='\n'));
+        printf("\nEnter a valid day number: ");
+    }
+}

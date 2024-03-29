@@ -26,7 +26,7 @@ void adminCreateAccount(accountP *head, unsigned int accnum);
  * @param accnum Account number to search for.
  * @return Pointer to the account node if found, NULL otherwise.
  */
-accountP accountSearch(accountP *head, unsigned int accnum);
+accountP accountSearch(accountP head, unsigned int accnum);
 
 /**
  * @brief Deletes an account from the account list by its account number.
@@ -34,7 +34,7 @@ accountP accountSearch(accountP *head, unsigned int accnum);
  * @param head Pointer to the pointer to the head of the account list.
  * @param accnum Account number to delete.
  */
-void adminDeleteAccount(accountP **head, unsigned int accnum);
+void adminDeleteAccount(accountP *head, unsigned int accnum);
 
 /**
  * @brief Edits account information such as code or customer's name.
@@ -42,6 +42,6 @@ void adminDeleteAccount(accountP **head, unsigned int accnum);
  * @param head Pointer to the head of the account list.
  * @param accnum Account number to edit.
  */
-void accountEdit(accountP *head, unsigned int accnum);
+void accountEdit(accountP head, unsigned int accnum);
 
 #endif /* ADMIN_H */

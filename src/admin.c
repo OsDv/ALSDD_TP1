@@ -26,7 +26,7 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
         scanf("%s", (*head)->data.customer.lName);
         // Read the account code
         printf("Account Code: ");
-        scanf("%u", &((*head)->data.code));
+        readUINT(&((*head)->data.code));
 
         // Initialize transaction history as NULL for the new account
         (*head)->data.history = NULL;
@@ -65,7 +65,7 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
         scanf("%s", p->next->data.customer.lName);
         // Read the account code
         printf("Account Code: ");
-        scanf("%u", &(p->next->data.code));
+        readUINT(&(p->next->data.code));
 
         // Initialize transaction history as NULL for the new account
         p->next->data.history = NULL;
@@ -77,14 +77,14 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
 
 
 
-accountP accountSearch(accountP *head, unsigned int accnum) {
+accountP accountSearch(accountP head, unsigned int accnum) {
     // Handle the case when the list is empty
-    if (*head == NULL) {
+    if (head == NULL) {
         return NULL;
     }
 
     // Initialize a pointer to traverse the linked list
-    accountP p = *head;
+    accountP p = head;
 
     // Traverse the linked list until the end is reached or the account is found
     while (p != NULL) {
@@ -103,7 +103,7 @@ accountP accountSearch(accountP *head, unsigned int accnum) {
 
 
 
-void adminDeleteAccount(accountP **head, unsigned int accnum) {
+void adminDeleteAccount(accountP *head, unsigned int accnum) {
     // Declare a pointer to hold the account node to be deleted
     accountP p;
 
@@ -115,9 +115,9 @@ void adminDeleteAccount(accountP **head, unsigned int accnum) {
         printf("Account not found");
     } 
     // If the account to be deleted is the head node
-    else if (p == **head) {
+    else if (p == *head) {
         // Update the head pointer to skip the first node
-        **head = p->next;
+        *head = p->next;
 
         // If the next node exists, update its previous pointer
         if (p->next != NULL) {
@@ -139,7 +139,8 @@ void adminDeleteAccount(accountP **head, unsigned int accnum) {
         if (p->next != NULL) {
             p->next->prev = p->prev;
         }
-
+        // Destroy the history linked list related to the node to be deleted
+        historyClean(p);
         // Free the memory allocated for the node to be deleted
         free(p);
 
@@ -149,7 +150,7 @@ void adminDeleteAccount(accountP **head, unsigned int accnum) {
 }
 
 
-void accountEdit(accountP *head, unsigned int accnum) {
+void accountEdit(accountP head, unsigned int accnum) {
     accountP p;
 
     // Search for the account node with the given account number
@@ -166,14 +167,14 @@ void accountEdit(accountP *head, unsigned int accnum) {
         printf("4. Exit\n");
         printf("Enter your choice: ");
 
-        int choice;
-        scanf("%d", &choice);
+        unsigned int choice;
+        readUINT(&choice);
 
         switch (choice) {
             case 1:
                 // Edit account code
                 printf("Enter the new account code: ");
-                scanf("%u", &(p->data.code));
+                readUINT(&(p->data.code));
                 printf("Account code updated successfully\n");
                 break;
             case 2:
@@ -200,7 +201,7 @@ void accountEdit(accountP *head, unsigned int accnum) {
 
 
 void adminControlPanel(accountP *head,unsigned int *accountsN) {
-    int choice;
+    unsigned int choice;
     bool exitMenu = false;
 
     while (!exitMenu) {
@@ -210,7 +211,7 @@ void adminControlPanel(accountP *head,unsigned int *accountsN) {
         printf("3. Edit Code/Customer\n");
         printf("4. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+        readUINT(&choice);
 
         switch (choice) {
             case 1:
@@ -218,7 +219,7 @@ void adminControlPanel(accountP *head,unsigned int *accountsN) {
                 unsigned int accountNumber;
                 do { 
                 printf("Enter account number: ");
-                scanf("%u", &accountNumber);
+                readUINT(&accountNumber);
                 if (accNumberExist(*head, accountNumber)){
                     printf("This account number is already taken. Enter another number.\n");
                 }
@@ -230,16 +231,16 @@ void adminControlPanel(accountP *head,unsigned int *accountsN) {
                 printf("\n-- Delete Customer Accounts --\n");
                 unsigned int deleteAccountNumber;
                 printf("Enter account number to delete: ");
-                scanf("%u", &deleteAccountNumber);
-                adminDeleteAccount(&head, deleteAccountNumber);
+                readUINT(&deleteAccountNumber);
+                adminDeleteAccount(head, deleteAccountNumber);
                 (*accountsN)--;
                 break;
             case 3:
                 printf("\n-- Edit Code/Customer --\n");
                 unsigned int editAccountNumber;
                 printf("Enter account number to edit: ");
-                scanf("%u", &editAccountNumber);
-                accountEdit(head, editAccountNumber);
+                readUINT(&editAccountNumber);
+                accountEdit(*head, editAccountNumber);
                 break;
             case 4:
                 printf("\nExiting Admin Control Panel...\n");
