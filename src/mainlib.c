@@ -229,10 +229,47 @@ void printTransaction(transactionP p){
     }
 }
 
+// secured input function to read an ineger from user
 void readUINT(unsigned int *i){
     char c;
     while(scanf("%u",i)!=1){
         while((c=fgetc(stdin))!=EOF && (c!='\n'));
-        printf("\nEnter a valid day number: ");
+        printf("\nEnter a valid number: ");
     }
+}
+
+// check if character c is an alphabet
+bool alphabetCheck(char c){
+    if ((c>64 && c<91)|| (c>96 && c<123 ) ) return 1;
+    else return 0;
+}
+
+// check if name is valid (not empty && contain only alphabet)
+bool validName(char *name){
+    int i;
+    for (i=0;i<19 && name[i];i++){
+        if (!alphabetCheck(name[i])) return 0;
+    }
+    if ((i==19 && name[19]!='\0') || name[0]=='\0') return 0;
+    else return 1;
+}
+
+// read a valid name 
+void readNAME(char *name){
+    int i=0;
+    char c;
+    bool test;
+    do {
+    c=fgetc(stdin);
+    while ((c=fgetc(stdin))!=EOF && c!='\n' && i<19)
+    {
+        name[i++]=c;
+    }
+    name[i]='\0';
+    test=validName(name);
+    if(!test) {
+        printf("Enter a valid name: "); 
+        i=0;
+    }
+    }while(!test);
 }

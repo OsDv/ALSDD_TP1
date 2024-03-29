@@ -17,13 +17,14 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
         // Print message indicating the creation of a new account
         printf("Creating new account number %u\n", (*head)->data.number);
         printf("Administrator, please insert the following information:\n");
+        
 
         // Read the first name of the customer
         printf("Customer's First Name: ");
-        scanf("%s", (*head)->data.customer.fName);
+        readNAME((*head)->data.customer.fName);
         // Read the last name of the customer
         printf("Customer's Last Name: ");
-        scanf("%s", (*head)->data.customer.lName);
+        readNAME((*head)->data.customer.lName);
         // Read the account code
         printf("Account Code: ");
         readUINT(&((*head)->data.code));
@@ -59,10 +60,10 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
 
         // Read the first name of the customer
         printf("Customer's First Name: ");
-        scanf("%s", p->next->data.customer.fName);
+        readNAME(p->next->data.customer.fName);
         // Read the last name of the customer
         printf("Customer's Last Name: ");
-        scanf("%s", p->next->data.customer.lName);
+        readNAME(p->next->data.customer.lName);
         // Read the account code
         printf("Account Code: ");
         readUINT(&(p->next->data.code));
@@ -180,13 +181,13 @@ void accountEdit(accountP head, unsigned int accnum) {
             case 2:
                 // Edit customer's first name
                 printf("Enter the new customer's first name: ");
-                scanf("%s", p->data.customer.fName);
+                readNAME(p->data.customer.fName);
                 printf("Customer's first name updated successfully\n");
                 break;
             case 3:
                 // Edit customer's last name
                 printf("Enter the new customer's last name: ");
-                scanf("%s", p->data.customer.lName);
+                readNAME(p->data.customer.lName);
                 printf("Customer's last name updated successfully\n");
                 break;
             case 4:

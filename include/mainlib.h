@@ -94,4 +94,10 @@ accountP accAccessNumber(accountP head,unsigned int number);// return a pointer 
 void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date);
 void printTransaction(transactionP p);
 void readUINT(unsigned int *i);
+// read a valid name 
+void readNAME(char *name);
+// check if name is valid (not empty && contain only alphabet)
+bool validName(char *name);
+// check if character c is an alphabet
+bool alphabetCheck(char c);
 #endif // LIB_H_INCLUDED
