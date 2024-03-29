@@ -39,7 +39,7 @@ void main(){
 
     printf("\033[2J");
     printf("Do you want to save modifications to the file? 1)yes 2)no : ");
-    scanf("%u",&choice);
+    readUINT(&choice);
     if (choice==1){
         fptr=fopen("file2.txt","w");
         writeFile(mainHead,accountsN,fptr);//file just for test then will be only one file
