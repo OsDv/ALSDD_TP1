@@ -16,8 +16,17 @@ unsigned int accNumber(accountP p){
 unsigned int accCode(accountP p){ // returns ushort the code of the account pointed by "p"
     return (p->data.code);
 }
+// returns pointer to account first name
+char *accFname(accountP p){
+    return (p->data.customer.fName);
+}
+// returns pointer to account last name
+char *accLname(accountP p){
+    return (p->data.customer.lName);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
-void accFName(accountP p,char *arg_fName){ // Copy the first name of client of account pointed by "p" in string arg_fName
+void accCPFName(accountP p,char *arg_fName){ // Copy the first name of client of account pointed by "p" in string arg_fName
     int i=0;
      while((p->data.customer.fName[i])&&(i<20)){
         arg_fName[i]=p->data.customer.fName[i];
@@ -27,7 +36,7 @@ void accFName(accountP p,char *arg_fName){ // Copy the first name of client of a
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-void accLName(accountP p,char *arg_lName){ // Copy the last name of client of account pointed by "p" in string arg_lName
+void accCPLName(accountP p,char *arg_lName){ // Copy the last name of client of account pointed by "p" in string arg_lName
     int i=0;
      while((p->data.customer.lName[i])&&(i<20)){
         arg_lName[i]=p->data.customer.lName[i];
@@ -110,7 +119,7 @@ void tranAssPrev(transactionP p,transactionP q){
 }
 
                                     /*  Abstract machine    */
-                                    void historyClean(accountP p){
+void historyClean(accountP p){
     transactionP next,tran= p->data.history;
     while (tran){
         next=tran->next;
@@ -200,6 +209,7 @@ void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date){
         tranAssPrev(tr,prev);
     }
     tranAssNext(tr,NULL);
+    acc->data.transNumber++;
 }
 
 void printTransaction(transactionP p){
@@ -219,3 +229,48 @@ void printTransaction(transactionP p){
     }
 }
 
+// secured input function to read an ineger from user
+void readUINT(unsigned int *i){
+    char c;
+    while(scanf("%u",i)!=1){
+        while((c=fgetc(stdin))!=EOF && (c!='\n'));
+        printf("\nEnter a valid number: ");
+    }
+}
+
+// check if character c is an alphabet
+bool alphabetCheck(char c){
+    if ((c>64 && c<91)|| (c>96 && c<123 ) ) return 1;
+    else return 0;
+}
+
+// check if name is valid (not empty && contain only alphabet)
+bool validName(char *name){
+    int i;
+    for (i=0;i<19 && name[i];i++){
+        if (!alphabetCheck(name[i])) return 0;
+    }
+    if ((i==19 && name[19]!='\0') || name[0]=='\0') return 0;
+    else return 1;
+}
+
+// read a valid name 
+void readNAME(char *name){
+    int i=0;
+    char c;
+    bool test;
+    do {
+    c=fgetc(stdin);
+    if (c!='\n') name[i++]=c;
+    while ((c=fgetc(stdin))!=EOF && c!='\n' && i<19)
+    {
+        name[i++]=c;
+    }
+    name[i]='\0';
+    test=validName(name);
+    if(!test) {
+        printf("Enter a valid name: "); 
+        i=0;
+    }
+    }while(!test);
+}

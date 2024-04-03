@@ -15,6 +15,7 @@
 #define MAGENTA "\033[35m"
 #define CYAN    "\033[36m"
 #define WHITE   "\033[37m"
+#define CLEAR "\033[2J"
 /*      Data structures definition      */
 // type and expected vlues for operation code 
 #define OPCODE unsigned char
@@ -28,6 +29,7 @@
 #define _OP3_ "Deposit"
 #define _OP4_ "Withdrawal"
 #define _TRANSACTION_FORMAT_ "Operation type: %s\nBalence:%s %u \033[0m \nDate: %s\n"
+#define _ACCOUNT_FORMAT_ "\tName: %s %s\n\tAccount number: %u\n\tAccount code: %u\n\tBalance: %lu\n"
 // type for customer contains first name and last name // 
 typedef struct { 
     char lName[20];
@@ -68,8 +70,12 @@ typedef struct AccNode{ // size=88
 void accAllocate(accountP *p);
 unsigned int accNumber(accountP p);
 unsigned int accCode(accountP p); // returns ushort the code of the account pointed by "p"
-void accCFName(accountP p,char *arg_fName); // Copy the first name of client of account pointed by "p" in string arg_fName
-void accCLName(accountP p,char *arg_lName); // Copy the last name of client of account pointed by "p" in string arg_lName
+// returns pointer to account first name
+char *accFname(accountP p);
+// returns pointer to account last name
+char *accLname(accountP p);
+void accCPFName(accountP p,char *arg_fName); // Copy the first name of client of account pointed by "p" in string arg_fName
+void accCPLName(accountP p,char *arg_lName); // Copy the last name of client of account pointed by "p" in string arg_lName
 unsigned long accBalence(accountP p); // RETURNS THE BALENCE OF THE ACCOUNT ULONG
 transactionP accHistory(accountP p);
 accountP accNext(accountP p);   // returns the adress of the next element of p in the linked list
@@ -87,5 +93,11 @@ bool accNumberExist(accountP head,unsigned int number);// check if account nummb
 accountP accAccessNumber(accountP head,unsigned int number);// return a pointer to an account by its number if its exists or NULL if not
 void addTrans(accountP acc,OPCODE code,unsigned int balence,char *date);
 void printTransaction(transactionP p);
-
+void readUINT(unsigned int *i);
+// read a valid name 
+void readNAME(char *name);
+// check if name is valid (not empty && contain only alphabet)
+bool validName(char *name);
+// check if character c is an alphabet
+bool alphabetCheck(char c);
 #endif // LIB_H_INCLUDED
