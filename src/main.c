@@ -48,7 +48,7 @@ void main(){
     printf("Do you want to save modifications to the file? 1)yes 2)no : ");
     readUINT(&choice);
     if (choice==1){
-        fptr=fopen("file2.txt","w");
+        fptr=fopen("accounts.txt","w");
         writeFile(mainHead,accountsN,fptr);//file just for test then will be only one file
         fclose(fptr);
     }

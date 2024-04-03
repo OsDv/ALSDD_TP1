@@ -236,7 +236,7 @@ void readUINT(unsigned int *i){
     char c;
     while(scanf("%u",i)!=1){
         while((c=fgetc(stdin))!=EOF && (c!='\n'));
-        printf("\nEnter a valid number: ");
+        printf("%sEnter a valid number: %s",RED,RESET);
     }
 }
 
@@ -271,7 +271,7 @@ void readNAME(char *name){
     name[i]='\0';
     test=validName(name);
     if(!test) {
-        printf("Enter a valid name: "); 
+        printf("%sEnter a valid name:%s ",RED,RESET); 
         i=0;
     }
     }while(!test);
