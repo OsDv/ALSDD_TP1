@@ -25,30 +25,30 @@ void customerTransfer(accountP head,accountP _sender_){// procedure to do transf
     readDate(date);// Just for test we made the date as user's input
     printf(CLEAR);
 
-    printf("===TRANSFER===\n");
-    printf("your balence: %lu $ \n",accBalence(_sender_));
-    printf("Enter the number of receiver's account: ");
+    printf("%s%s=========== TRANSFER ===========%s\n",CYAN,BOLD,RESET);
+    printf("%s%sYour current balence is: %s %u%s$\n",BOLD,YELLOW,GREEN,accBalence(_sender_),RESET);
+    printf("%s%sEnter the number of receiver's account:%s ",BOLD,YELLOW,RESET);
     readUINT(&receiverNum);
     while (receiverNum!=0 && (!accNumberExist(head,receiverNum) || (receiverNum==(_sender_->data.number))))
     {
         if (receiverNum==_sender_->data.number) printf("You can transfer to your self!\n");
-        printf("Please enter a valid number or '0' to exit: ");
+        printf("%sPlease enter a valid number,%s or '0' to exit: ",RED,RESET);
         readUINT(&receiverNum);
     }
     if (receiverNum!=0){
-    printf("Amount to transfer: ");
+    printf("%s%sAmount to transfer:%s ",BOLD,YELLOW,RESET);
     readUINT(&amount);
     while (amount!=0 && amount>accBalence(_sender_))
     {
-        printf("You don't have enough money re enter amount or '0' to exit: ");
+        printf("%s%sYou don't have enough money re enter amount,%s or '0' to exit: ",BOLD,RED,RESET);
         readUINT(&amount);
     } 
     }
     if (amount!=0) {
         transfer(_sender_,accAccessNumber(head,receiverNum),amount,date);
-        printf("Operation succeced\n");
+        printf("%s%sOperation succeced%s\n",GREEN,BOLD,RESET);
     }
-    else printf("Operation cancelled\n");
+    else printf("%s%sOperation cancelled%s\n",RED,BOLD,RESET);
     printf("Press ENTER to continue..\n");
     getchar();getchar();
 
@@ -59,24 +59,24 @@ void customerDeposit(accountP head){
     char date[11];
     printf("Enter the date:");
     readDate(date);// Just for test we made the date as user's input
-
-    printf("===DEPOSIT TO ACCOUNT===\n");
-    printf("Enter the number of account: ");
+    printf(CLEAR);
+    printf("%s%s=========== DEPOSIT TO ACCOUNT ===========%s\n",BOLD,CYAN,RESET);
+    printf("%s%sEnter the number of account: %s",YELLOW,BOLD,RESET);
     readUINT(&destNum); // 
     while (destNum!=0 && !accNumberExist(head,destNum) )
     {
-        printf("Please enter a valid number or '0' to exit: ");
+        printf("%sPlease enter a valid number,%s or '0' to exit: ",RED,RESET);
         readUINT(&destNum);
     }
     if (destNum!=0){
-        printf("Amount to deposit: ");
+        printf("%s%sAmount to deposit:%s ",BOLD,YELLOW,RESET);
         readUINT(&amount);
     }
     if (amount!=0) {
         deposit(accAccessNumber(head,destNum),amount,date);
-        printf("Operation succeced\n");
+        printf("%s%sOperation succeced%s\n",GREEN,BOLD,RESET);
     }
-    else printf("Operation cancelled\n");
+    else printf("%s%sOperation cancelled%s\n",BOLD,RED,RESET);
     printf("Press ENTER to continue..\n");
     getchar();getchar();
 }
@@ -86,49 +86,52 @@ void customerWithdrawal(accountP src){
     char date[11];
     printf("Enter the date:");
     readDate(date);// Just for test we made the date as user's input
-
-    printf("===WITHDRAWAL of funds===\n");
-    printf("Your balence: %u$\n",src->data.balence);
-    printf("Amount to take: ");
+    printf(CLEAR);
+    printf("%s%s=========== WITHDRAWAL of funds ===========%s\n",CYAN,BOLD,RESET);
+    printf("%s%sYour current balence is: %s %u%s$\n",BOLD,YELLOW,GREEN,accBalence(src),RESET);
+    printf("%s%sAmount to take: %s",BOLD,YELLOW,RESET);
     readUINT(&amount);
     while ( amount>accBalence(src))
         {
             printf("You dont have enough money!,your balence: %u$\n",accBalence(src));
-            printf("Enter a valid amount or 0 to cancel: ");
+            printf("%sEnter a valid amount,%s or 0 to cancel: ",RED,RESET);
             readUINT(&amount);
         }
     if (amount!=0) {
         withdrawal(src,amount,date);
-        printf("Operation succeced\n");
+        printf("%s%sOperation succeced%s\n",GREEN,BOLD,RESET);
     }
-    else printf("Operation cancelled\n");
+    else printf("%s%sOperation cancelled%s\n",RED,BOLD,RESET);
     printf("Press ENTER to continue..\n");
     getchar();getchar();
      
 }
 
 void customerCheckBalence(accountP src){
-    printf("===CHECK BALENCE===\n");
+    printf(CLEAR);
+    printf("%s%s=========== CHECK BALENCE ===========%s\n",BOLD,CYAN,RESET);
     printf("Hi,%s %s\n",src->data.customer.fName,src->data.customer.lName);
-    printf("Your current balence is %u$\n",accBalence(src));
+    printf("%s%sYour current balence is: %s %u%s$\n",BOLD,YELLOW,GREEN,accBalence(src),RESET);
     printf("Press ENTER to continue..\n");
-    getchar();
+    getchar();getchar();
 
 }
 
 void customerHistoryDate(accountP p){
     char date[11];
     bool noTrans=true;
-    printf("===TRANSACTIONS HISTORY===)\n");
-    printf("Hi, %s %s\n",p->data.customer.fName,p->data.customer.lName);
+    printf(CLEAR);
+    printf("%s%s=========== TRANSACTIONS HISTORY ===========%s\n",BOLD,CYAN,RESET);
+    printf("Hi,%s %s %s %s\n",BOLD,p->data.customer.fName,p->data.customer.lName,RESET);
     printf("%s Enter the date: \n %s",YELLOW,RESET);
     readDate(date);
     transactionP tr=p->data.history;
     while (tr)
     {
         if (!strncmp(date,tr->data.date,10)) {
-            if (noTrans) printf("===Your tansactions on %s: ===\n",date);
+            if (noTrans) printf("%s%s=== Your tansactions on %s: ===\n%s-----------------------------------------\n",BOLD,CYAN,date,RESET);
             printTransaction(tr);
+            printf("-----------------------------------------\n");
             noTrans=false;
         }
         tr=tranNext(tr);
@@ -157,6 +160,7 @@ void readDate(char *dest){
     readUINT(&yy);
     } while(!dateCheck(dd,mm,yy));
     sprintf(dest,"%.2u/%.2u/%.4u",dd,mm,yy);
+    dest[10]='\0';
 }
 bool dateCheck(int d,int m,int y){
     int max_d;
@@ -179,23 +183,21 @@ bool dateCheck(int d,int m,int y){
 
 accountP customerSignin(accountP head){
     unsigned int num;
-    char c;
-    printf("=== Sign in ===\n");
-    printf("Enter your account number: ");
+    printf(CLEAR);// Clear terminal
+    printf("%s\t ===== Sign in =====\n",CYAN);
+    printf("%s Enter your account number: %s",YELLOW,RESET);
     readUINT(&num);
     while (!accNumberExist(head,num)&&num!=0){
-        printf("Not found!\nEnter a valid number or 0 to back: ");
+        printf("%s Not found!\nEnter a valid number%s, or ""0"" to back: ",RED,RESET);
         readUINT(&num);
-        while((c=(char)fgetc(stdin))!=EOF && c!='\n');
     }
     if (num==0) return NULL;
     else {
         accountP p=accAccessNumber(head,num);
-        printf("\nAccount code: ");
+        printf("%sAccount code: %s",YELLOW,RESET);
         readUINT(&num);
-    while((c=(char)fgetc(stdin))!=EOF && c!='\n');
     while (num!=p->data.code&&num!=0){
-        printf("Wrong code!!\nEnter the code again or 0 to back: ");
+        printf("%s Wrong code!!\nEnter the code again%s, or ""0"" to back: ",RED,RESET);
         readUINT(&num);
     }
     if (num==0) return NULL;
@@ -210,16 +212,16 @@ void customerDashboard(accountP head,accountP actAccount){
     char c;
     do {
         printf("\033[2J");
-        printf("=== Account Dashboard ===\n");
+        printf("%s=========== Account Dashboard ===========%s\n",CYAN,RESET);
         printf(_ACCOUNT_FORMAT_,accFname(actAccount),accLname(actAccount),accNumber(actAccount),accCode(actAccount),accBalence(actAccount));
-        printf("==The Menu ==\n");
-        printf("\t1) Make transfer\n");
-        printf("\t2) Deposit to an account\n");
-        printf("\t3) Make a withdrawal\n");
-        printf("\t4) Check total amount\n");
-        printf("\t5) Check your transactions hitory\n");
-        printf("\t0) To exit...\n");
-        printf("%sEnter your choice: %s",CYAN,RESET);
+        printf("%s%s=========== The Menu ===========%s\n",BOLD,CYAN,RESET);
+        printf("%s%s1) Make transfer\n",BOLD,BLUE);
+        printf("2) Deposit to an account\n");
+        printf("3) Make a withdrawal\n");
+        printf("4) Check total amount\n");
+        printf("5) Check your transactions hitory\n");
+        printf("0) To exit...\n");
+        printf("%s\e[4mEnter your choice: %s",CYAN,RESET);
         readUINT(&choice);
         switch (choice)
         {

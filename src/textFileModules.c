@@ -25,7 +25,8 @@ void accountFromFile(accountP p,FILE *fptr){ //  read an account from txt file
     while ((strncmp(line,"END",3))) // read all account transactions until the end flag
     {
         sscanf(line,"%u",&(tr->data.code)); // read transaction code
-        strncpy(tr->data.date,&line[2],10); //read transaction date
+        strncpy(tr->data.date,&line[2],11); //read transaction date
+        tr->data.date[10]='\0';
         sscanf(&line[13],"%u",&(tr->data.balence)); // read transaction balence
         tr=tr->next;
         fgets(line,255,fptr);   // read next line
@@ -36,6 +37,8 @@ void readFile(accountP* head, FILE* fptr,unsigned int *num){
     // read a text file contains a list of accounts in a linkedlist pointed by head and contain "num" account
     char str[256]; // string to read file lines
     int i; 
+    fgets(str,255,fptr);
+    if(!strncmp("EMPTY_FILE",str,10)) return;
     do fgets(str,255,fptr); while(strncmp("FILE_BEGIN",str,10));// looks for the file begin
     fgets(str,256,fptr);// read the number of accounts
     sscanf(str,"%u",num);
@@ -74,7 +77,10 @@ void accountToFile(accountP p,FILE *fptr){ //  write an account from txt file
    
 } 
 void writeFile(accountP head,unsigned int accNUM,FILE* fptr){
-    if (head==NULL) return;
+    if (head==NULL) {
+        fputs("EMPTY_FILE",fptr);
+        return;
+    }
     accountP p=head;
     fputs("=======FILE_STRUCTURE======\n",fptr);
     fputs("//begining of file and ending are marked by ""FILE_BEGIN"" and ""FILE_END""\n",fptr);
