@@ -112,4 +112,6 @@ void readNAME(char *name);
 bool validName(char *name);
 // check if character c is an alphabet
 bool alphabetCheck(char c);
+// Start page
+void startPage();
 #endif // LIB_H_INCLUDED

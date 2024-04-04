@@ -13,7 +13,7 @@ void main(){
             readFile(&mainHead,fptr,&accountsN);
             fclose(fptr);
         }
-    
+    startPage();
     do
     {
         printf("\033[2J");// clear screen

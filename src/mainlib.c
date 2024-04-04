@@ -276,3 +276,32 @@ void readNAME(char *name){
     }
     }while(!test);
 }
+
+void startPage(){
+printf("\033[2J");
+printf("\033[35m \e[1m");
+printf( "888888ba                    dP          8888ba.88ba                                                        \n");
+printf( " 88    `8b                   88          88  `8b  `8b                                                       \n"     );
+printf("a88aaaa8P' .d8888b. 88d888b. 88  .dP     88   88   88 .d8888b. 88d888b. .d8888b. .d8888b. .d8888b. 88d888b. \n"  );
+printf( " 88   `8b. 88'  `88 88'  `88 88888""      88   88   88 88'  `88 88'  `88 88'  `88 88'  `88 88ooood8 88'  `88 \n" );
+printf( " 88    .88 88.  .88 88    88 88  `8b.    88   88   88 88.  .88 88    88 88.  .88 88.  .88 88.  ... 88       \n");
+printf( " 88888888P `88888P8 dP    dP dP   `YP    dP   dP   dP `88888P8 dP    dP `88888P8 `8888P88 `88888P' dP       \n");
+printf("oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.88~oooooooooooooooooo\n");
+printf("                                                                                  d8888P                    \n");
+printf("\e[m");
+
+printf("\033[33m __| |____________________________________________| |__\n");
+printf("\033[33m(__   ____________________________________________   __)\n");
+printf("\033[33m   | |                                            | |\n");
+printf("\033[33m   | |   \e[1mBy:\e[m            \033[33m                          | |\n");
+printf("\033[33m   | |     \e[1m\033[36mOussama Belguesmia\e[m   \033[33m                  | |\n");
+printf("\033[33m   | |     \e[1m\033[36mWassim Zineedine Belloul \e[m   \033[33m           | |\n");
+printf("\033[33m   | |                                            | |\n");
+printf("\033[33m   | |    \e[1m\033[36mGROUPE: 1CP7    \e[m  \033[33m                      | |\n");
+printf("\033[33m __| |____________________________________________| |__\n");
+printf("\033[33m(__   ____________________________________________   __)\n");
+printf("\033[33m   | |                                            | |\n");
+printf("\e[m");
+printf("\nPress Enter to continue...");
+getchar();
+}
