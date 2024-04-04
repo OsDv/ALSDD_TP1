@@ -3,6 +3,7 @@
 
 #include "mainlib.h"
 // Function prototypes
+#define SECURITY_CODE 123
 
 /**
  * @brief Displays the admin control panel and performs account management actions.

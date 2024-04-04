@@ -15,18 +15,18 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
         (*head)->data.balence = 0;
 
         // Print message indicating the creation of a new account
-        printf("Creating new account number %u\n", (*head)->data.number);
+        printf("%s%sCreating new account number:%s %u\n",BOLD,YELLOW,RESET ,(*head)->data.number);
         printf("Administrator, please insert the following information:\n");
         
 
         // Read the first name of the customer
-        printf("Customer's First Name: ");
+        printf("%s%sCustomer's First Name: %s",BOLD,YELLOW,RESET);
         readNAME((*head)->data.customer.fName);
         // Read the last name of the customer
-        printf("Customer's Last Name: ");
+        printf("%s%sCustomer's Last Name: %s",BOLD,YELLOW,RESET);
         readNAME((*head)->data.customer.lName);
         // Read the account code
-        printf("Account Code: ");
+        printf("%s%sAccount Code:%s ",BOLD,YELLOW,RESET);
         readUINT(&((*head)->data.code));
 
         // Initialize transaction history as NULL for the new account
@@ -55,17 +55,17 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
         p->next->prev = p;
 
         // Print message indicating the creation of a new account
-        printf("Creating new account number %u\n", p->next->data.number);
+        printf("%s%sCreating new account number:%s %u\n",BOLD,YELLOW,RESET ,(*head)->data.number);
         printf("Administrator, please insert the following information:\n");
 
         // Read the first name of the customer
-        printf("Customer's First Name: ");
+        printf("%s%sCustomer's First Name: %s",BOLD,YELLOW,RESET);
         readNAME(p->next->data.customer.fName);
         // Read the last name of the customer
-        printf("Customer's Last Name: ");
+        printf("%s%sCustomer's Last Name: %s",BOLD,YELLOW,RESET);
         readNAME(p->next->data.customer.lName);
         // Read the account code
-        printf("Account Code: ");
+        printf("%s%sAccount Code:%s ",BOLD,YELLOW,RESET);
         readUINT(&(p->next->data.code));
 
         // Initialize transaction history as NULL for the new account
@@ -113,7 +113,7 @@ void adminDeleteAccount(accountP *head, unsigned int accnum) {
 
     // If the account node is not found
     if (p == NULL) {
-        printf("Account not found");
+        printf("%s%sAccount not found!%s",RED,BOLD,RESET);
     } 
     // If the account to be deleted is the head node
     else if (p == *head) {
@@ -129,7 +129,7 @@ void adminDeleteAccount(accountP *head, unsigned int accnum) {
         free(p);
 
         // Print a success message
-        printf("Account number %u has been deleted successfully", accnum);
+        printf("%s%sAccount number %s%u \033[32mhas been deleted successfully%s",BOLD,GREEN,RED,accnum,RESET);
     } 
     // If the account to be deleted is not the head node
     else {
@@ -146,8 +146,10 @@ void adminDeleteAccount(accountP *head, unsigned int accnum) {
         free(p);
 
         // Print a success message
-        printf("Account number %u has been deleted successfully", accnum);
+        printf("%s%sAccount number %s%u \033[32mhas been deleted successfully%s",BOLD,GREEN,RED,accnum,RESET);
     }
+    printf("\nPress Enter to continue...");
+    getchar();getchar();
 }
 
 
@@ -159,14 +161,15 @@ void accountEdit(accountP head, unsigned int accnum) {
 
     // If the account node is not found
     if (p == NULL) {
-        printf("Account not found\n");
+        printf("%s%sAccount not found!%s",RED,BOLD,RESET);
     } else {
-        printf("Account found successfully\nWhat information do you want to edit?\n");
-        printf("1. Account Code\n");
+        printf("%s%sAccount found successfully%s\nWhat information do you want to edit?\n",GREEN,BOLD,GREEN);
+        printf("%s1. Account Code\n",YELLOW);
         printf("2. Customer's First Name\n");
         printf("3. Customer's Last Name\n");
         printf("4. Exit\n");
-        printf("Enter your choice: ");
+        printf("%sEnter your choice: %s",GREEN,RESET);
+        printf("-----------------------------------------\n");
 
         unsigned int choice;
         readUINT(&choice);
@@ -174,72 +177,79 @@ void accountEdit(accountP head, unsigned int accnum) {
         switch (choice) {
             case 1:
                 // Edit account code
-                printf("Enter the new account code: ");
+                printf("%s%sEnter the new account code: ",BOLD,YELLOW);
                 readUINT(&(p->data.code));
-                printf("Account code updated successfully\n");
+                printf("%sAccount code updated successfully%s\n",GREEN,RESET);
                 break;
             case 2:
                 // Edit customer's first name
-                printf("Enter the new customer's first name: ");
+                printf("%s%sEnter the new customer's first name: ",BOLD,YELLOW);
                 readNAME(p->data.customer.fName);
-                printf("Customer's first name updated successfully\n");
+                printf("%sCustomer's first name updated successfully%s\n",GREEN,RESET);
                 break;
             case 3:
                 // Edit customer's last name
-                printf("Enter the new customer's last name: ");
+                printf("%s%sEnter the new customer's last name: ",BOLD,YELLOW);
                 readNAME(p->data.customer.lName);
-                printf("Customer's last name updated successfully\n");
+                printf("%sCustomer's last name updated successfully%s\n",GREEN,RESET);
                 break;
             case 4:
                 printf("Exiting account editing...\n");
                 break;
             default:
-                printf("Invalid choice!\n");
+                printf("%s%sInvalid choice!%s\n",RED,BOLD,RESET);
                 break;
         }
+        printf("\nPress Enter to continue...");
+        getchar();getchar();
     }
 }
 
 
 void adminControlPanel(accountP *head,unsigned int *accountsN) {
-    unsigned int choice;
+    unsigned int choice=1;
     bool exitMenu = false;
 
     while (!exitMenu) {
-        printf("\n===== Admin Control Panel =====\n");
-        printf("1. Add Customer Accounts\n");
+        printf(CLEAR);
+        printf("\n%s%s=========== Admin Control Panel ===========\n",BOLD,CYAN);
+        printf("%s1. Add Customer Accounts\n",YELLOW);
         printf("2. Delete Customer Accounts\n");
         printf("3. Edit Code/Customer\n");
         printf("4. Exit\n");
-        printf("Enter your choice: ");
+        if ((choice>4)||(choice<1))printf("\n%sInvalid choice! Please enter a valid option.\n",RED);//last choice was invalid
+        printf("%sEnter your choice:%s ",GREEN,RESET);
         readUINT(&choice);
 
         switch (choice) {
             case 1:
-                printf("\n-- Add Customer Accounts --\n");
+                printf(CLEAR);
+                printf("\n%s%s=========== Add Customer Accounts ===========%s\n",BOLD,CYAN,RESET);
                 unsigned int accountNumber;
                 do { 
-                printf("Enter account number: ");
+                printf("%s%sEnter account number: %s",YELLOW,BOLD,RESET);
                 readUINT(&accountNumber);
                 if (accNumberExist(*head, accountNumber)){
-                    printf("This account number is already taken. Enter another number.\n");
+                    printf("%s%sThis account number is already taken.%s Enter another number, or ""0"" to cancel\n",BOLD,RED,RESET);
                 }
-                } while (accNumberExist(*head, accountNumber));
+                } while ((accNumberExist(*head, accountNumber))&& (accAccessNumber!=0));
                 adminCreateAccount(head, accountNumber);
                 (*accountsN)++;
                 break;
             case 2:
-                printf("\n-- Delete Customer Accounts --\n");
+                printf(CLEAR);
+                printf("\n%s%s=========== Delete Customer Accounts ===========%s\n",BOLD,CYAN,RESET);
                 unsigned int deleteAccountNumber;
-                printf("Enter account number to delete: ");
+                printf("%s%sEnter account number to delete: %s",YELLOW,BOLD,RESET);
                 readUINT(&deleteAccountNumber);
                 adminDeleteAccount(head, deleteAccountNumber);
                 (*accountsN)--;
                 break;
             case 3:
-                printf("\n-- Edit Code/Customer --\n");
+                printf(CLEAR);
+                printf("\n%s%s=========== Edit Code/Customer ===========\n",CYAN,BOLD);
                 unsigned int editAccountNumber;
-                printf("Enter account number to edit: ");
+                printf("%sEnter account number to edit: %s",YELLOW,RESET);
                 readUINT(&editAccountNumber);
                 accountEdit(*head, editAccountNumber);
                 break;
@@ -248,62 +258,12 @@ void adminControlPanel(accountP *head,unsigned int *accountsN) {
                 exitMenu = true;
                 break;
             default:
-                printf("\nInvalid choice! Please enter a valid option.\n");
                 break;
         }
     }
 } 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*int main() {
-    // Initialize the head pointer to NULL
-    accountP head = NULL;
-
-    // Call the admin control panel function to perform actions
-    adminControlPanel(&head);
-
-    // Display the list of accounts after exiting the admin control panel
-    printf("\n===== Account List =====\n");
-    if (head == NULL) {
-        printf("No accounts found.\n");
-    } else {
-        accountP current = head;
-        while (current != NULL) {
-            printf("Account Number: %u\n", current->data.number);
-            printf("Customer Name: %s %s\n", current->data.customer.fName, current->data.customer.lName);
-            printf("Account Code: %u\n", current->data.code);
-            printf("Balance: %lu\n", current->data.balence);
-            printf("Transaction History: %p\n", (void *)current->data.history); // Just printing the address for simplicity
-            printf("Transaction Count: %u\n\n", current->data.transNumber);
-            current = current->next;
-        }
-    }
-
-    // Free any remaining memory allocated for accounts
-    accountP temp;
-    while (head != NULL) {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
-
-    return 0;
-}*/
 
 
 
