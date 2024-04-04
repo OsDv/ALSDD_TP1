@@ -55,7 +55,7 @@ void adminCreateAccount(accountP *head, unsigned int accnum) {
         p->next->prev = p;
 
         // Print message indicating the creation of a new account
-        printf("%s%sCreating new account number:%s %u\n",BOLD,YELLOW,RESET ,p->data.number);
+        printf("%s%sCreating new account number:%s %u\n",BOLD,YELLOW,RESET ,p->next->data.number);
         printf("Administrator, please insert the following information:\n");
 
         // Read the first name of the customer
