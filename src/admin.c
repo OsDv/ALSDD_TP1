@@ -255,6 +255,7 @@ void adminControlPanel(accountP *head,unsigned int *accountsN) {
                 break;
             case 4:
                 printf("\nExiting Admin Control Panel...\n");
+                printf("\nPress Enter to continue...");
                 exitMenu = true;
                 break;
             default:
