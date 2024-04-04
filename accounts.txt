@@ -5,26 +5,25 @@
 //each account start with BEGIN and end with END
 //begining of file and ending are marked by FILE_BEGIN and FILE_END
 // account informations order :
-#BEGIN
-#account_number
-#account_code
-#first_name
-#last_name
-#balence
-#number_of_transactions
-#//list_of_transactions (code|date|balence)
-#END
-
+BEGIN
+account_number
+account_code
+first_name
+last_name
+balence
+number_of_transactions
+//list_of_transactions (code|date|balence)
+END
 FILE_BEGIN
-6
+7
 
 BEGIN
 1
 123
 Oussama
 Bl
-20000
-10
+15000
+11
 3|01/01/2000|5500
 2|01/01/2000|200
 2|01/01/2000|300
@@ -35,6 +34,7 @@ Bl
 2|01/01/2000|3000
 4|01/01/2000|3000
 3|01/01/2000|10000
+2|04/04/2024|5000
 END
 
 BEGIN
@@ -98,5 +98,15 @@ Naruto
 Uzumaki
 0
 0
+END
+
+BEGIN
+6
+123
+Bill
+Gates
+5000
+1
+1|04/04/2024|5000
 END
 FILE_END
