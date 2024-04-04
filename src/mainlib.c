@@ -84,10 +84,12 @@ void asslName(accountP p,char *arg_lName){
      p->data.customer.lName[20]='\0';// last character always "\0" for protection
 
 }
-void accAssNext(accountP p,accountP q){ // assigne q to "next" field of p
+// assigne q to "next" field of p
+void accAssNext(accountP p,accountP q){ 
     p->next=q;
 }
-void accAssPrev(accountP p,accountP q){  // assigne q to "prev" field of p
+// assigne q to "prev" field of p
+void accAssPrev(accountP p,accountP q){  
     p->prev=q;
 }
 
@@ -108,7 +110,7 @@ void tranAssBalence(transactionP p,unsigned int balence){
     p->data.balence=balence;
 }
 void tranAssDate(transactionP p,char *date){
-    strncpy(p->data.date,date,10);
+    strncpy(p->data.date,date,11);
 }
 
 void tranAssNext(transactionP p,transactionP q){
@@ -234,7 +236,7 @@ void readUINT(unsigned int *i){
     char c;
     while(scanf("%u",i)!=1){
         while((c=fgetc(stdin))!=EOF && (c!='\n'));
-        printf("\nEnter a valid number: ");
+        printf("%sEnter a valid number: %s",RED,RESET);
     }
 }
 
@@ -269,7 +271,7 @@ void readNAME(char *name){
     name[i]='\0';
     test=validName(name);
     if(!test) {
-        printf("Enter a valid name: "); 
+        printf("%sEnter a valid name:%s ",RED,RESET); 
         i=0;
     }
     }while(!test);
