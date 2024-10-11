@@ -14,6 +14,17 @@ The purpose of this repository is to collaborate during the development of the p
 - Programming Language: C
 - Data Structure: Linked Lists
 
+## Building:
+inorder to build the project in case you dont have the 'make' tool you can use the following command using the gcc compiler:
+### For windows:
+```console
+gcc mainlib.c admin.c customer.c textFileModules.c main.c -I ..\include\ -o ..\BankManager.exe
+```
+### For Linux:
+```console
+gcc mainlib.c admin.c customer.c textFileModules.c main.c -I ../include/ -o ../BankManager.exe
+```
+
 ## Contributors:
 - Belguesmia Oussama
 - Zineedine Belloul
